@@ -1,0 +1,23 @@
+<!DOCUMENT>
+<html>
+<head>
+    <title>First Programe in html</title>
+    <script type="text/javascript">
+     function substitute() {
+         var value = document.getElementById('getval').value;
+         if(value.length == 0) {
+             alert('Please enter a valid data');
+             return;
+         }
+         var Mytitle = document.getElementById('mytitle');
+         Mytitle.innerHTML = value;
+     }
+    </script>
+</head>
+    <body>
+    <h1 id="mytitle">This is my first example</h1>
+     <input type="text" id="getval" />
+     <input type="submit" value="click me" onclick="substitute()" />
+    </body>
+
+</html>
