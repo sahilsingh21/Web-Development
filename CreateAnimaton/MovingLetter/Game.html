@@ -43,7 +43,7 @@
           // Update Entity(); function and drawEntity();
     updateEnetity = function(something){
            Entity(something);
-           drawEntity(something);
+           drawEnemy(something);
           }
           // Basic featuer or work how to move, speed like that
     Entity = function(something){
@@ -60,9 +60,20 @@
     }
     
            // Draw the player or enemy name on window
-    drawEntity = function(something){
-         ctx.fillText(something.name,something.x,something.y);
+    drawPlayer = function(something){
+         ctx.save();
+         ctx.fillStyle = 'green';   
+         ctx.fillRect(something.x - 10, something.y - 10, 20, 20);
+         ctx.restore();
     }
+    
+    drawEnemy = function(something){
+         ctx.save();
+         ctx.fillStyle = 'red';
+         ctx.fillRect(something.x - 15, something.y - 15, 30, 30);
+         ctx.restore();
+    }
+    
           // getting distince from entity1 and entity2
     getdistance = function(entity1, entity2){
               var vx = entity1.x - entity2.x;
@@ -103,7 +114,7 @@
                     }  
                 }
             }
-            drawEntity(player);                    // draw play name only and mouse will controle the player 
+            drawPlayer(player);                    // draw play name only and mouse will controle the player 
             ctx.fillText(player.hp + 'HP', 0, 30); // print player health on window and update
         }
           
