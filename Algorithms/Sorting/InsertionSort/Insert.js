@@ -1,12 +1,7 @@
 function insert() {
     var Num=document.getElementById("num").value;
-    var Arr;
-    for(var i=0; i<Num;i++) {
-        Arr[i] = document.getElementById("insert").value;
-    }
-    var ins = insertionSort2(Num, Arr);
-    document.getElementById("answer").value = ins;
-
+    var Val= document.getElementById("insert").value;
+    var Arr [Num, Val];
     for(var j=1;j<n;j++)
 	 {
 	     var key = arr[j];
@@ -21,5 +16,6 @@ function insert() {
         }
         cout<<endl;
 	 }
+    document.getElementById("answer").value = ins;
 
 }
