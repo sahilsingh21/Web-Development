@@ -7,23 +7,33 @@
       <script>
          var ctx = document.getElementById("ctx").getContext("2d");
           ctx.font = '30px Arial';
-          var width = 500;
-          var height = 500;
-          var x = 20;
-          var y = 30;
-          var spx = 20;
-          var spy = 5;
+             var width = 500;
+             var height = 500;
+          var player = {
+              x : 20,
+              y : 30,
+              spx : 20,
+              spy : 5,
+              width : 500,
+              height : 500,
+              name : 'S'
+          }
+          
+          function play(){
+              ctx.fillText(player.name,player.x,player.y);
+            player.x=player.x+player.spx;
+            player.y=player.y+player.spy;
+            if(player.x > player.width || player.x < 0){
+                player.spx = -player.spx;
+            }
+            if(player.y > player.height || player.y < 0){
+                player.spy = -player.spy;
+            }
+          }
+          
         function update(){
             ctx.clearRect(0,0,width,height);
-            ctx.fillText('S',x,y);
-            x=x+spx;
-            y=y+spy;
-            if(x > width || x < 0){
-                spx = -spx;
-            }
-            if(y > height || y < 0){
-                spy = -spy;
-            }
+            play();
         }
        setInterval(update,50);
         
