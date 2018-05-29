@@ -18,8 +18,17 @@
               height : 500,
               name : 'S'
           }
+          var enemy = {
+              x : 40,
+              y : 30,
+              spx : 30,
+              spy : 10,
+              width : 500,
+              height : 500,
+              name : 'E'
+          }
           
-          function play(){
+          function Player(){
               ctx.fillText(player.name,player.x,player.y);
             player.x=player.x+player.spx;
             player.y=player.y+player.spy;
@@ -31,9 +40,22 @@
             }
           }
           
+          function Enemy(){
+              ctx.fillText(enemy.name,enemy.x,enemy.y);
+            enemy.x=enemy.x+enemy.spx;
+            enemy.y=enemy.y+enemy.spy;
+            if(enemy.x > enemy.width || enemy.x < 0){
+                enemy.spx = -enemy.spx;
+            }
+            if(enemy.y > enemy.height || enemy.y < 0){
+                enemy.spy = -enemy.spy;
+            }
+          }
+          
         function update(){
             ctx.clearRect(0,0,width,height);
-            play();
+            Player();
+            Enemy();
         }
        setInterval(update,50);
         
