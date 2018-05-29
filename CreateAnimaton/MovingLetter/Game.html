@@ -3,60 +3,80 @@
      <title>moving variables</title> 
    </head>
     <body>
-        <canvas id="ctx" width="500" height="500" style="border: 1px solid #000000;"></canvas>
+        <canvas id="ctx" width="1000" height="1000" style="border: 1px solid #000000;"></canvas>
       <script>
          var ctx = document.getElementById("ctx").getContext("2d");
           ctx.font = '30px Arial';
              var width = 500;
              var height = 500;
+          var enemyList = {};
+          Enemy('E1',60,70,10,5,500,500);
+          Enemy('E2',250,350,20,5,500,500);
+          Enemy('E3',250,150,30,5,500,500);
           var player = {
-              x : 20,
-              y : 30,
-              spx : 20,
-              spy : 5,
-              width : 500,
-              height : 500,
-              name : 'S'
-          }
-          var enemy = {
-              x : 40,
+               x : 40,
               y : 30,
               spx : 30,
               spy : 10,
               width : 500,
               height : 500,
-              name : 'E'
+              name : 'P'
           }
           
-          function Player(){
-              ctx.fillText(player.name,player.x,player.y);
-            player.x=player.x+player.spx;
-            player.y=player.y+player.spy;
-            if(player.x > player.width || player.x < 0){
-                player.spx = -player.spx;
+    function Enemy(id,x,y,speedx,sppedy,width,height){
+          var enemy = {
+               x : x,
+              y : y,
+              spx : speedx,
+              spy : sppedy,
+              width : width,
+              height : height,
+              name : id
+          }
+          enemyList[id] = enemy;
+    }
+          
+          function updateEnetity(something){
+              ctx.fillText(something.name,something.x,something.y);
+            something.x += something.spx;
+            something.y += something.spy;
+              
+            if(something.x > something.width || something.x < 0){
+                something.spx = -something.spx;
             }
-            if(player.y > player.height || player.y < 0){
-                player.spy = -player.spy;
+            if(something.y > something.height || something.y < 0){
+                something.spy = -something.spy;
             }
           }
           
-          function Enemy(){
-              ctx.fillText(enemy.name,enemy.x,enemy.y);
-            enemy.x=enemy.x+enemy.spx;
-            enemy.y=enemy.y+enemy.spy;
-            if(enemy.x > enemy.width || enemy.x < 0){
-                enemy.spx = -enemy.spx;
-            }
-            if(enemy.y > enemy.height || enemy.y < 0){
-                enemy.spy = -enemy.spy;
-            }
+          function getdistance(entity1, entity2){
+              var vx = entity1.x - entity2.x;
+              var vy = entity1.y - entity2.y;
+              return Math.sqrt(vx*vx*vy*vy);
           }
+          
+          function testcollisionEntity(entity1, entity2){
+              var distance = getdistance(entity1, entity2);
+              return distance < 10;
+          }
+          
+          
           
         function update(){
             ctx.clearRect(0,0,width,height);
-            Player();
-            Enemy();
+            for(var key in enemyList){
+                updateEnetity(enemyList[key]);
+                
+                var isColliding = testcollisionEntity(player, enemyList[key]);
+                
+                if(isColliding){
+                    console.log('Colliding!');
+                }
+            }
+            updateEnetity(player);
         }
+          
+          
        setInterval(update,50);
         
       </script>
