@@ -3,28 +3,29 @@
      <title>moving variables</title> 
    </head>
     <body>
-        <canvas id="ctx" width="1000" height="1000" style="border: 1px solid #000000;"></canvas>
+        <canvas id="ctx" width="500" height="500" style="border: 1px solid #000000;"></canvas>
       <script>
          var ctx = document.getElementById("ctx").getContext("2d");
           ctx.font = '30px Arial';
              var width = 500;
              var height = 500;
-          var enemyList = {};
-          Enemy('E1',60,70,10,5,500,500);
-          Enemy('E2',250,350,20,5,500,500);
-          Enemy('E3',250,150,30,5,500,500);
+          var TimeToSurvive = Date.now();
+          var enemyList = {};  // Creating Enemy List
+          
+          // defining Player Object and its featuers
           var player = {
-               x : 40,
+              x : 40,
               y : 30,
               spx : 30,
               spy : 10,
               width : 500,
               height : 500,
-              name : 'P'
+              name : 'P',
+              hp : 10
           }
-          
-    function Enemy(id,x,y,speedx,sppedy,width,height){
-          var enemy = {
+          // defining Enemy variable type function they run when code is reading up to down
+    Enemy = function(id,x,y,speedx,sppedy,width,height){  
+        var enemy = {    // Enemy object and its featuers
                x : x,
               y : y,
               spx : speedx,
@@ -33,51 +34,81 @@
               height : height,
               name : id
           }
-          enemyList[id] = enemy;
+          enemyList[id] = enemy;      // enemyList[0] = E(Enemy);
     }
+          Enemy('E1',60,70,10,5,500,500);            // Calling Enemy function  
+          Enemy('E2',250,350,20,5,500,500);          // only run when write blow on this object type function
+          Enemy('E3',250,150,30,5,500,500);          
           
-          function updateEnetity(something){
-              ctx.fillText(something.name,something.x,something.y);
-            something.x += something.spx;
-            something.y += something.spy;
-              
-            if(something.x > something.width || something.x < 0){
-                something.spx = -something.spx;
+          // Update Entity(); function and drawEntity();
+    updateEnetity = function(something){
+           Entity(something);
+           drawEntity(something);
+          }
+          // Basic featuer or work how to move, speed like that
+    Entity = function(something){
+            something.x += something.spx;    // update speed X or moving X
+            something.y += something.spy;    // update speed Y or moving y
+        
+               // condition when the enemy or player smash the wall
+            if(something.x > something.width || something.x < 0){    
+                something.spx = -something.spx;     // they move backward or forward
             }
             if(something.y > something.height || something.y < 0){
-                something.spy = -something.spy;
+                something.spy = -something.spy;     // they move upward or downward
             }
-          }
-          
-          function getdistance(entity1, entity2){
+    }
+    
+           // Draw the player or enemy name on window
+    drawEntity = function(something){
+         ctx.fillText(something.name,something.x,something.y);
+    }
+          // getting distince from entity1 and entity2
+    getdistance = function(entity1, entity2){
               var vx = entity1.x - entity2.x;
               var vy = entity1.y - entity2.y;
               return Math.sqrt(vx*vx*vy*vy);
-          }
-          
-          function testcollisionEntity(entity1, entity2){
+    }
+          // getting collision b/w entity1 and entity2 
+    testcollisionEntity = function(entity1, entity2){       // they return the value if collide (true, false)
               var distance = getdistance(entity1, entity2);
               return distance < 10;
-          }
+     }
           
           
+          // which direction mouse is moving player(P) will move also same direction
+     document.onmousemove = function(mouse){
+         var mouseX = mouse.clientX;
+         var mouseY = mouse.clientY;
+         
+         player.x = mouseX;
+         player.y = mouseY;
+     }
+           
           
-        function update(){
-            ctx.clearRect(0,0,width,height);
-            for(var key in enemyList){
-                updateEnetity(enemyList[key]);
+          // update all the things
+        update = function(){
+            ctx.clearRect(0,0,width,height);      // clear screen 
+            for(var key in enemyList){            
+                updateEnetity(enemyList[key]);    // update or appears all enemy(E) on window 
                 
-                var isColliding = testcollisionEntity(player, enemyList[key]);
+                var isColliding = testcollisionEntity(player, enemyList[key]);       // Check player and enemy collide or not
                 
-                if(isColliding){
-                    console.log('Colliding!');
+                if(isColliding){                                        // if player collide
+                    player.hp = player.hp - 1;                          // Decrease their Health(hp)
+                    if(player.hp <= 0){                                 // if hp less then equal to 0
+                        var timeSurvive = Date.now() - TimeToSurvive;   // how much time they survive
+                         console.log('You Loss!' + timeSurvive + 'ms'); // they print if they loss
+                        player.hp = 10;                                 // Update new health
+                    }  
                 }
             }
-            updateEnetity(player);
+            drawEntity(player);                    // draw play name only and mouse will controle the player 
+            ctx.fillText(player.hp + 'HP', 0, 30); // print player health on window and update
         }
           
           
-       setInterval(update,50);
+       setInterval(update,50);   // loop
         
       </script>
     </body>
