@@ -1,0 +1,78 @@
+
+
+html
+{
+    
+    background: url(https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.bord
+{
+    text-align: center;
+    padding: 30px;
+    border: 20 dashed blue;
+}
+
+.login-logo
+{
+    background-size: cover;
+    padding: 20px;
+}
+
+.login-box {
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #26282a;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 30%);
+    width: 360px;
+    right: 0;
+    min-height: 550px;
+    z-index: 1;
+    padding: 28px 5px;
+    padding-bottom: 10px;
+    border: 1px solid transparent;
+    border-top: 1px solid #f1f1f5;
+}
+
+
+
+
+
+
+
+
+
+  .polling_message {
+    color: white;
+    float: left;
+    margin-right: 2%;
+  }
+  
+  .view_port {
+    background-color: black;
+    height: 25px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .cylon_eye {
+    background-color: red;
+    background-image: linear-gradient(to right,
+        rgba(0, 0, 0, .9) 25%,
+        rgba(0, 0, 0, .1) 50%,
+        rgba(0, 0, 0, .9) 75%);
+    color: white;
+    height: 100%;
+    width: 20%;
+  
+    -webkit-animation: 4s linear 0s infinite alternate move_eye;
+            animation: 4s linear 0s infinite alternate move_eye;
+  }
+  
+  @-webkit-keyframes move_eye { from { margin-left: -20%; } to { margin-left: 100%; }  }
+          @keyframes move_eye { from { margin-left: -20%; } to { margin-left: 100%; }  }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Login page</title>
+        <link rel="stylesheet" href="first.css">
+    </head>
+    <body>
+      
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNjkhTbrt1sEBXUCHcfO1YDZabWV00FBiL1g&usqp=CAU">
+            </div>
+            <div class="bord">
+            Name : <input id="name" pattern="[a-zA-Z]{4,}" /><br>
+            Last Name : <input id="Lname" pattern="[A-Za-z]" /> <br>
+            Email : <input id="email" /><br>
+            Passward : <input id="pass" pattern="[0-9a-zA-Z]{8,}" /> <br>
+            Phone : <input id="phone" /> <br>
+            Gender : <input id="gen" type="radio" value="Gender" name="M" /> Male 
+            <input type="radio" name="F" value="Gender" checked /> Female  <br>
+            <!-- <input name="Gender" size="20"/><br> -->
+
+            Technology <br>
+            <input type="checkbox" name="tech">HTML <BR>
+                <input type="checkbox"> CSS <br>
+                <input type="checkbox"> Javascript<br> 
+
+                City lived in <br>
+                <select>
+                    <option>Amritsar</option>
+                    <option>Delhi</option>
+                    <option>Jalandher</option>
+                </select><br>
+
+                Select Your Favarate
+                <input type="color"><br>
+
+                Date Of Birth <br>
+                <input type="datetime-local"><br>
+
+            <img src="data:image/png;base64,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" width="50" height="50" ><br>
+                Upload Your resume
+            <input type="file"/>
+            <button type="reset">Reset</button>
+            <button type="submit"> Submit</button>
+            </div>
+        </div>
+
+            <div class="box"></div>
+
+            <div class="view_port">
+                <div class="polling_message">
+                  Listening for dispatches
+                </div>
+                <div class="cylon_eye"></div>
+              </div>
+              
+    </body>
+</html>
