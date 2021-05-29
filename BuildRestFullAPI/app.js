@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv/config');
 
 //Middlewares  (hitting the routes)
 //app.use(auth)  //this func. is the user is authentification or not
@@ -20,12 +21,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/posts', (req, res) => {
-    res.send('We are on posts');
+    res.send('We are on posts'); 
 });
 
 
 //Connect To DB
-mongoose.connect('mongodb+srv://rest:test@cluster0.2cdt3.mongodb.net/Data', {
+mongoose.connect(
+    process.env.DB_CONNECTION, {
     useUnifiedTopology : true,
     useNewUrlParser : true,
 }).then(console.log('Connected to Mongo DB!'))
