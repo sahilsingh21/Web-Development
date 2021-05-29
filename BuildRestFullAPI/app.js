@@ -10,7 +10,10 @@ require('dotenv/config');
 //     console.log('This is a middleware running');
 // });
 
+//Import Routes
+const postsRoute = require('./routes/posts');
 
+app.use('/posts', postsRoute);
 
 //Routes (if we send the messege then we use app.post('/', (req, res)....))
 //app.delete() and in that we write logic what post we can delete
@@ -20,9 +23,6 @@ app.get('/', (req, res) => {
     res.send('We are on home');
 });
 
-app.get('/posts', (req, res) => {
-    res.send('We are on posts'); 
-});
 
 
 //Connect To DB
